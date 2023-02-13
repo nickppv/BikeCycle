@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  ГлаВВелосипеД
+{% endblock %}
+
+{% block content %}
+
+<div class="container-1">
+  <div class="main-middle-box">
+    {% for i in all_details %}
+      <div class="bicycle-card">
+        <div class="picture-mini">
+          <img class="image-settings" src="{% static i.picture %}">
+        </div>
+        <br>
+        <p>Брэнд: {{ i.brand }}</p>
+        <br>
+        <p>Модель: {{i.model}}</p>
+        <br>
+        <p>Предназначение: {{ i.veloformat }}, Возраст: {{ i.sex_age }}</p>
+        <br>
+        <p>Цена: {{ i.price }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
