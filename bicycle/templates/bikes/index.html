@@ -6,23 +6,34 @@
 
 {% block content %}
 
-<div class="container-1">
-  <div class="main-middle-box">
-    {% for i in all_details %}
-      <div class="bicycle-card">
-        <div class="picture-mini">
-          <img class="image-settings" src="{% static i.picture %}">
+<div class="base">
+  <div class="container-1">
+    <div class="main-middle-box">
+      {% for i in page_obj %}
+        <div class="bicycle-card">
+          <div class="picture-mini">
+            <img class="image-settings" src="{% static i.picture %}">
+          </div>
+          <br>
+          <p>Брэнд: {{ i.brand }}</p>
+          <br>
+          <p>Модель: {{i.model}}</p>
+          <br>
+          <p>Формат: {{ i.veloformat }}, Возраст: {{ i.sex_age }}</p>
+          <br>
+          <p>Цена: {{ i.price }}</p>
         </div>
-        <br>
-        <p>Брэнд: {{ i.brand }}</p>
-        <br>
-        <p>Модель: {{i.model}}</p>
-        <br>
-        <p>Предназначение: {{ i.veloformat }}, Возраст: {{ i.sex_age }}</p>
-        <br>
-        <p>Цена: {{ i.price }}</p>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
+
+    <div class="paginator">
+      {% include 'includes/paginator.html' %}
+    </div>
+  </div>
+  <div class="footer">
+    {% include 'includes/footer.html' %}
   </div>
 </div>
 {% endblock %}
+
+

@@ -1,82 +1,7 @@
 *{
   margin: 0px;
   padding: 0px;
-  color: beige;
-}
-
-.container-1 {
-  display: flex;
-}
-
-.container-1 div {
-  background-color: #141414;
-  padding: 10px;
-  
-  justify-content: space-around;
-}
-
-
-@media screen and (max-width: 700px) {
-  .main-middle-box {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 1;
-  }
-}
-@media screen and (min-width: 700px) {
-  .main-middle-box {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    margin-left: 7%;
-    margin-right: 7%;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .main-middle-box {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    margin-left: 13%;
-    margin-right: 13%;
-  }
-}
-@media screen and (min-width: 1600px) {
-  .main-middle-box {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    margin-left: 17%;
-    margin-right: 17%;
-  }
-}
-@media screen and (min-width: 1920px) {
-  .main-middle-box {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    margin-left: 20%;
-    margin-right: 20%;
-  }
-}
-
-.bicycle-card {
-  border: 3px solid rgb(0, 0, 0);
-  margin-bottom: 30px;
-  align-content: space-between;
-}
-
-.picture-mini {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 200px;
-}
-
-.image-settings {
-  flex-shrink: 0;
+  color: #d1d1d1;
 }
 
 .header {
@@ -91,22 +16,140 @@
   line-height: 100px;
 }
 
-body {
-  background-color: #212121;
+/* основной контейнер с каруселью, списком велосипедов и информацией о них */
+.container-1 {
+  font-size: 14px;
 }
+
+.container-1 div {
+  background-color: #141414;
+  padding: 10px;
+  /* background-image: url("../img/site/background_image_repeat.png"); */
+  justify-content: space-around;
+}
+
+/* адаптивность под разные экраны для блока с велосипедами и пагинатора: внешний отступ */
+@media screen and (max-width: 700px) {
+  .main-middle-box, .paginator {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+}
+@media screen and (min-width: 700px) {
+  .main-middle-box, .paginator {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    margin-left: 7%;
+    margin-right: 7%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .main-middle-box, .paginator {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    margin-left: 13%;
+    margin-right: 13%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .main-middle-box, .paginator {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    margin-left: 17%;
+    margin-right: 17%;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .main-middle-box, .paginator {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+}
+
+/* контейнер под каждый товар: картинка и основные данные */
+.bicycle-card {
+  border: 5px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  margin-bottom: 30px;
+  align-content: space-between;
+}
+.bicycle-card:hover {
+  box-shadow: inset 0px 0px 30px #000;
+}
+
+/* контейнер под картинку */
+.picture-mini {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+}
+
+/* пока не удалять, была нужна*/
+/* .image-settings {
+  flex-shrink: 0;
+} */
 
 .mainblock {
   height: 250px;
-  border: 1px solid rgb(0, 255, 13);
   margin: 20px;
   background-color: #141414;
   color:#d1d1d1;
   width: 50%;
 }
 
+/* пытался сделать картинку на фон */
+/* .lower-main-middle-box {
+  display: flex;
+  background-image: "../img/site/background_image_repeat.png";
+  background-image: "../img/site/lower-main-middle-box.png";
+} */
 
+/* стиль для контейнера пагинатора */
+.paginate-container {
 
+}
+/* стиль для элементов списка пагинатора */
+.paginator ul li {
+  font-size: 16px;
+  font-family: "Stamps_Pro_Flex";
+  margin: 8px;
+  display: inline;
+}
+.paginator ul li:hover {
+  text-shadow: 0px 0px 3px red;
 
+}
+/* выделяем цифру, на которой сейчас находится страница */
+.page-link {
+  font-size: 20px;
+}
+
+.footer {
+  font-family: "Stamps_Pro_Flex";
+  font-size: 30px;
+  width: 100%;
+  height: 100px;
+  background-color: #141414;
+  text-align: center;
+  /* object-fit: contain; */
+  color: #d1d1d1;
+  line-height: 100px;
+}
+
+.base {
+  flex-direction: column;
+}
+/* скачанный шрифт для основного заголовка */
 @font-face {
   font-family: "Stamps_Pro_Flex"; 
   src: url("../fonts/Stamps_Pro_Flex.ttf") format("truetype"); 
