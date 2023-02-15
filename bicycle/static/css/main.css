@@ -79,9 +79,17 @@
   border-radius: 10px;
   margin-bottom: 30px;
   align-content: space-between;
+  min-height: 100%;
 }
 .bicycle-card:hover {
   box-shadow: inset 0px 0px 30px #000;
+}
+.bicycle-card li {
+  font-size: 13px;
+  list-style-type: square;
+  font-family: "Stamps_Pro_Flex";
+  margin: 8px;
+  margin-left: 16px;
 }
 
 /* контейнер под картинку */
@@ -92,6 +100,8 @@
   align-items: center;
   width: 300px;
   height: 200px;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
 /* пока не удалять, была нужна*/

@@ -1,6 +1,6 @@
 {% if page_obj.has_other_pages %}
-  <nav>
-    <ul>
+  <nav aria-label="Page navigation" >
+    <ul class="paginate-container">
       {% if page_obj.has_previous %}
         <li><a href="?page=1">Первая</a></li>
         <li>

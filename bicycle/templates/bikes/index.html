@@ -4,36 +4,35 @@
   ГлаВВелосипеД
 {% endblock %}
 
+
+
+
 {% block content %}
-
-<div class="base">
-  <div class="container-1">
-    <div class="main-middle-box">
-      {% for i in page_obj %}
-        <div class="bicycle-card">
-          <div class="picture-mini">
-            <img class="image-settings" src="{% static i.picture %}">
-          </div>
-          <br>
-          <p>Брэнд: {{ i.brand }}</p>
-          <br>
-          <p>Модель: {{i.model}}</p>
-          <br>
-          <p>Формат: {{ i.veloformat }}, Возраст: {{ i.sex_age }}</p>
-          <br>
-          <p>Цена: {{ i.price }}</p>
-        </div>
-      {% endfor %}
+  {% for i in page_obj %}
+    <div class="bicycle-card">
+      <div class="picture-mini">
+        <img class="image-settings" src="{% static i.picture %}">
+      </div>
+      <ul>
+        <li>
+          Брэнд: {{ i.brand }}
+        </li>
+        <li>
+          Модель: {{i.model}}
+        </li>
+        <li>
+          Формат: {{ i.veloformat }}, Возраст: {{ i.sex_age }}
+        </li>
+        <li>
+          Цена: {{ i.price }}
+        </li>
+      </ul>
+      {% comment %} <p>Брэнд: {{ i.brand }}</p>
+      <p>Модель: {{i.model}}</p>
+      <p>Формат: {{ i.veloformat }}, Возраст: {{ i.sex_age }}</p>
+      <p>Цена: {{ i.price }}</p> {% endcomment %}
     </div>
-
-    <div class="paginator">
-      {% include 'includes/paginator.html' %}
-    </div>
-  </div>
-  <div class="footer">
-    {% include 'includes/footer.html' %}
-  </div>
-</div>
+  {% endfor %}
 {% endblock %}
 
 
