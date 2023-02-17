@@ -2,6 +2,20 @@ from django.db import models
 
 
 class New_Bike(models.Model):
+    # чтобы создать поле выбора, можно просто создать список кортежей и
+    # передать его в поле модели, но лучше создать отдельно константы
+    # которые передать в кортежи, которые передадутся в поле модели.
+    UNI = 'UNI'
+    BI = 'BI'
+    TRI = 'TRI'
+    OTH = 'OTH'
+
+    WHEEL_COUNT = [
+        (UNI, 'Уницикл'),
+        (BI, 'Обычный'),
+        (TRI, 'Трицикл'),
+        (OTH, 'Другое')
+    ]
     brand = models.CharField(max_length=40,
                              verbose_name='Производитель')
     model = models.CharField(max_length=40,
@@ -11,7 +25,12 @@ class New_Bike(models.Model):
                                verbose_name='Пол и возраст')
     veloformat = models.CharField(max_length=15,
                                   default='Горный',
-                                  verbose_name='Формат')
+                                  verbose_name='Назначение')
+    wheel_count = models.CharField(max_length=3,
+                                   default='BI',
+                                   choices=WHEEL_COUNT,
+                                   verbose_name='Кол-во колес'
+                                   )
     description = models.TextField(verbose_name='Описание')
     picture = models.TextField(verbose_name='Изображение товара')
     price = models.FloatField(verbose_name='Стоимость')

@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls import handler404, handler500
 
+# настройки для отображения в админке вместо слов "Администрирование" и др.
 admin.site.site_header = 'ГлаВВелосипеД'
 admin.site.index_title = 'Вы - прекрасный администратор'
 
@@ -24,3 +26,7 @@ urlpatterns = [
     path('', include('bikes.urls', namespace='bikes')),
 
 ]
+
+# переопределяем страницы ошибок, вместо стандартных делаем свои - красивые!
+handler404 = "bikes.views.page_not_found" # noqa
+handler500 = "bikes.views.server_error"   # noqa

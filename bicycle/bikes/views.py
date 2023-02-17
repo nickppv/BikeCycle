@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.shortcuts import  get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import New_Bike
 
 # постоянная для пагинатора с кол-вом постов на странице
@@ -44,3 +44,15 @@ def model_detail(request, brand_slug):
 def about(request):
     return render(request, 'about/about.html')
 
+
+#  создаем функцию для отображения нашего варианта страницы ошибки 404
+def page_not_found(request, exception):
+    return render(request,
+                  'about/404.html',
+                  {'path': request.path},
+                  status=404)
+
+
+#  создаем функцию для отображения нашего варианта страницы ошибки 500
+def server_error(request):
+    return render(request, 'about/500.html', status=500)
