@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import New_Bike
+from .models import New_Bike, Sportsman
 
 # постоянная для пагинатора с кол-вом постов на странице
 AMOUNT_POSTS = 15

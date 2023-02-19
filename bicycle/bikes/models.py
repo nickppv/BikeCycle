@@ -1,5 +1,8 @@
 from django.db import models
 
+# добавляем валидаторы, чтобы сделать ограничение на отрицат. значения в полях
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 class New_Bike(models.Model):
     # чтобы создать поле выбора, можно просто создать список кортежей и
@@ -16,29 +19,62 @@ class New_Bike(models.Model):
         (TRI, 'Трицикл'),
         (OTH, 'Другое')
     ]
-    brand = models.CharField(max_length=40,
-                             verbose_name='Производитель')
-    model = models.CharField(max_length=40,
-                             verbose_name='Модель')
-    sex_age = models.CharField(max_length=10,
-                               default='Взрослый',
-                               verbose_name='Пол и возраст')
-    veloformat = models.CharField(max_length=15,
-                                  default='Горный',
-                                  verbose_name='Назначение')
-    wheel_count = models.CharField(max_length=3,
-                                   default='BI',
-                                   choices=WHEEL_COUNT,
-                                   verbose_name='Кол-во колес'
-                                   )
-    description = models.TextField(verbose_name='Описание')
-    picture = models.TextField(verbose_name='Изображение товара')
-    price = models.FloatField(verbose_name='Стоимость')
-    reliability = models.IntegerField(default=0,
-                                      blank=True,
-                                      verbose_name='Поломок на 100 шт.')
-    add_date = models.DateTimeField(auto_now=True,
-                                    verbose_name='Дата добавления в БД')
+    brand = models.CharField(
+        max_length=40,
+        verbose_name='Производитель'
+        )
+    model = models.CharField(
+        max_length=30,
+        verbose_name='Модель'
+        )
+    sex_age = models.CharField(
+        max_length=10,
+        default='Взрослый',
+        verbose_name='Пол и возраст'
+        )
+    veloformat = models.CharField(
+        max_length=15,
+        default='Горный',
+        verbose_name='Назначение'
+        )
+    wheel_count = models.CharField(
+        max_length=3,
+        default='BI',
+        # создали поле выбора из огранич. списка. Остальные настройки выше.
+        choices=WHEEL_COUNT,
+        verbose_name='Кол-во колес'
+        )
+    sportsman = models.ForeignKey(
+        'Sportsman',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+    extensions = models.ManyToManyField(
+        'Extension',
+        blank=True,
+    )
+    description = models.TextField(
+        verbose_name='Описание'
+        )
+    picture = models.TextField(
+        verbose_name='Изображение товара'
+        )
+    price = models.FloatField(
+        validators=[MinValueValidator(0)],
+        verbose_name='Стоимость'
+        )
+    reliability = models.IntegerField(
+        # валидатор ограничивает создание значения меньше нуля и больше 100
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+        default=0,
+        blank=True,
+        verbose_name='Поломок на 100 шт.'
+        )
+    add_date = models.DateTimeField(
+        auto_now=True,
+        verbose_name='Дата добавления в БД'
+        )
 
     class Meta:
         verbose_name = 'Велосипед'
@@ -48,9 +84,67 @@ class New_Bike(models.Model):
         return f'{self.brand} - {self.model}'
 
 
-class Sportsmens(models.Model):
-    name = models.CharField(max_length=50)
-    surname = models.CharField(max_length=50)
-    birthday = models.DateField()
-    distance = models.IntegerField()
-    count_trophy = models.IntegerField
+class Sportsman(models.Model):
+
+    # создаем поле выбора для пола спортсмена
+    M = 'MAN'
+    W = 'WOMAN'
+    CHOICE_SEX = [(M, 'Мужчина'), (W, 'Женщина')]
+
+    name = models.CharField(
+        max_length=50,
+        verbose_name='Имя'
+        )
+    surname = models.CharField(
+        max_length=50,
+        verbose_name='Фамилия'
+        )
+    sex = models.CharField(
+        max_length=7,
+        choices=CHOICE_SEX,
+        verbose_name='Пол'
+    )
+    birthday = models.DateField(
+        verbose_name='Дата рождения'
+    )
+    all_distance = models.IntegerField(
+        verbose_name='Пройденная за карьеру дистанция'
+    )
+    brand_distance = models.IntegerField(
+        verbose_name='Пройденная дистанция за брэнд'
+    )
+    count_trophy = models.IntegerField(
+        verbose_name='Количество наград',
+        blank=True,
+        null=True,
+        default=0,
+    )
+
+    class Meta:
+        verbose_name = 'Спортсмен'
+        verbose_name_plural = 'Спортсмены'
+
+    def __str__(self) -> str:
+        return f'{self.name} {self.surname}'
+
+
+class Extension(models.Model):
+    extension = models.CharField(
+        verbose_name='Расширение для велосипеда',
+        max_length=80,
+    )
+    brand_extension = models.CharField(
+        verbose_name='Производитель',
+        max_length=40,
+    )
+    description = models.TextField(
+        verbose_name='Описание расширения',
+        blank=True
+    )
+
+    class Meta:
+        verbose_name = 'расширение'
+        verbose_name_plural = 'Расширения'
+
+    def __str__(self) -> str:
+        return f'{self.extension}'
