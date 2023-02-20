@@ -4,6 +4,11 @@
   color: #d1d1d1;
 }
 
+/* основной блок, в котором находятся все остальные блоки */
+.base {
+  flex-direction: column;
+}
+
 .header {
   font-family: "Stamps_Pro_Flex";
   font-size: 100px;
@@ -16,15 +21,9 @@
   line-height: 100px;
 }
 
-/* основной контейнер с каруселью, списком велосипедов и информацией о них */
-.container-1 {
-  font-size: 14px;
-}
-
 .container-1 div {
   background-color: #141414;
-  padding: 10px;
-  /* background-image: url("../img/site/background_image_repeat.png"); */
+  /* padding: 10px; */
   justify-content: space-around;
 }
 
@@ -79,8 +78,12 @@
   border-radius: 10px;
   margin-bottom: 30px;
   align-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
   min-height: 100%;
 }
+
 .bicycle-card:hover {
   box-shadow: inset 0px 0px 30px #000;
 }
@@ -97,10 +100,10 @@
   overflow: hidden;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 300px;
-  height: 200px;
-  border-radius: 10px;
+  align-items:stretch;
+  width: 320px;
+  height: 256px;
+  border-radius: 5px;
   margin-bottom: 15px;
 }
 
@@ -134,10 +137,11 @@
   font-family: "Stamps_Pro_Flex";
   margin: 8px;
   display: inline;
+  text-decoration-skip-ink: none;
+  text-decoration: none;
 }
 .paginator ul li:hover {
   text-shadow: 0px 0px 3px red;
-
 }
 /* выделяем цифру, на которой сейчас находится страница */
 .page-link {
@@ -156,9 +160,6 @@
   line-height: 100px;
 }
 
-.base {
-  flex-direction: column;
-}
 /* скачанный шрифт для основного заголовка */
 @font-face {
   font-family: "Stamps_Pro_Flex"; 

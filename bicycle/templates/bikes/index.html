@@ -4,9 +4,6 @@
   ГлаВВелосипеД
 {% endblock %}
 
-
-
-
 {% block content %}
   {% for i in page_obj %}
     <div class="bicycle-card">
@@ -27,10 +24,6 @@
           Цена: {{ i.price }}
         </li>
       </ul>
-      {% comment %} <p>Брэнд: {{ i.brand }}</p>
-      <p>Модель: {{i.model}}</p>
-      <p>Формат: {{ i.veloformat }}, Возраст: {{ i.sex_age }}</p>
-      <p>Цена: {{ i.price }}</p> {% endcomment %}
     </div>
   {% endfor %}
 {% endblock %}

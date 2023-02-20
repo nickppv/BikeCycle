@@ -68,16 +68,15 @@ class New_BikeAdmin(admin.ModelAdmin):
     # аттрибут, который запрещает редактирование внесенных в него полей
 
     # Перечисляем поля, которые должны отображаться в админке
-    list_display = ['brand',
+    list_display = ['id',
+                    'brand',
                     'model',
                     'veloformat',
                     'wheel_count',
                     'price',
                     'reliability',
                     'rating',
-                    'sportsman',
-                    'id',
-                    ]
+                    'sportsman']
     # Добавляем интерфейс для поиска по тексту постов
     search_fields = ('brand', 'model',)
     # Добавляем возможность фильтрации по цене и надежности
@@ -87,7 +86,9 @@ class New_BikeAdmin(admin.ModelAdmin):
     # возможность редактировать поля не заходя в детальную информацию.
     # Можно добавлять все поля, кроме первого и даты: первое является ссылкой
     # на наш объект (с.Егоров Артем), а второе дата добавления в БД
-    list_editable = ['wheel_count',
+    list_editable = ['brand',
+                     'model',
+                     'wheel_count',
                      'price',
                      'reliability',
                      'sportsman']
