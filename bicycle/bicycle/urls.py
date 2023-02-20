@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import handler404, handler500
+from django.conf.urls.static import static
+
+from bicycle import settings
 
 # настройки для отображения в админке вместо слов "Администрирование" и др.
 admin.site.site_header = 'ГлаВВелосипеД'
@@ -26,6 +29,10 @@ urlpatterns = [
     path('', include('bikes.urls', namespace='bikes')),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 # переопределяем страницы ошибок, вместо стандартных делаем свои - красивые!
 handler404 = "bikes.views.page_not_found" # noqa

@@ -64,7 +64,7 @@ class New_BikeAdmin(admin.ModelAdmin):
     # вычисляемое поле, котрое мы записываем в словарь
     # prepopulated_fields = {slug: (model,)}
 
-    readonly_fields = ['brand', 'model']
+    readonly_fields = ['price',]
     # аттрибут, который запрещает редактирование внесенных в него полей
 
     # Перечисляем поля, которые должны отображаться в админке
@@ -86,14 +86,12 @@ class New_BikeAdmin(admin.ModelAdmin):
     # возможность редактировать поля не заходя в детальную информацию.
     # Можно добавлять все поля, кроме первого и даты: первое является ссылкой
     # на наш объект (с.Егоров Артем), а второе дата добавления в БД
-    list_editable = ['brand',
-                     'model',
-                     'wheel_count',
+    list_editable = ['wheel_count',
                      'price',
                      'reliability',
                      'sportsman']
     # начальная сорт-ка задается при помощи ordering, можно по неск. полям
-    ordering = ['veloformat', ]
+    ordering = ['brand', ]
     # пагинация в админке
     list_per_page = 15
     # создаем фильтр для связанного поля extensions-bicycle. После добавления

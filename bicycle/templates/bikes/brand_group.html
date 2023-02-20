@@ -3,8 +3,9 @@
 {% block title %}
   ГлаВВелосипеД
 {% endblock %}
+
 {% block content %}
-  {% for i in group %}
+  {% for i in brand_group %}
   <div class="bicycle-card">
     <div class="picture-mini">
       <img class="image-settings" src="{% static i.picture %}">

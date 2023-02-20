@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 # добавляем валидаторы, чтобы сделать ограничение на отрицат. значения в полях
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -21,11 +22,15 @@ class New_Bike(models.Model):
     ]
     brand = models.CharField(
         max_length=40,
-        verbose_name='Производитель'
+        verbose_name='Производитель',
+        blank=False,
+        null=False
         )
     model = models.CharField(
-        max_length=30,
-        verbose_name='Модель'
+        max_length=50,
+        verbose_name='Модель',
+        blank=False,
+        null=False
         )
     sex_age = models.CharField(
         max_length=10,
@@ -56,7 +61,7 @@ class New_Bike(models.Model):
     )
     description = models.TextField(
         verbose_name='Описание'
-        )
+    )
     picture = models.TextField(
         verbose_name='Изображение товара'
         )
@@ -72,9 +77,28 @@ class New_Bike(models.Model):
         verbose_name='Поломок на 100 шт.'
         )
     add_date = models.DateTimeField(
-        auto_now=True,
+        # auto_now_add - добавляетдату и больше не меняет
+        # auto_now будет обновлять дату каждый раз при редактировании
+        auto_now_add=True,
         verbose_name='Дата добавления в БД'
         )
+    brand_slug = models.SlugField(
+        null=False,
+        verbose_name='Slug Брэнда',
+        blank=True,
+    )
+    model_slug = models.SlugField(
+        null=False,
+        unique=True,
+        db_index=True,
+        verbose_name='Slug Модели',
+        blank=True,
+    )
+
+    def save(self, *args, **kwargs):
+        self.brand_slug = slugify(self.brand)
+        self.model_slug = slugify(self.model)
+        super(New_Bike, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Велосипед'

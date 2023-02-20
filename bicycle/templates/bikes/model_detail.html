@@ -2,4 +2,16 @@
 {% load static %}
 {% block title %} ГлаВВелосипеД {% endblock %}
 
-<p>Просто текст - временно - УДОЛИТЬ</p>
+{% block content %}
+  {% for i in model_detail %}
+  <div class="bicycle-card">
+    <div class="picture-mini">
+      <img class="image-settings" src="{% static i.picture %}">
+    </div>
+    <p>Брэнд: {{ i.brand }} </p>
+    <p>Модель: {{i.model}}</p>
+    <p>Формат: {{ i.veloformat }}, Возраст: {{ i.sex_age }}</p>
+    <p>Цена: {{ i.price }}</p>
+  </div>
+  {% endfor %}
+{% endblock %}

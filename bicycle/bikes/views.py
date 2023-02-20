@@ -23,19 +23,21 @@ def index(request):
 
 
 # страница со всеми байками выбранного брэнда
-def brand_group(request, brand_group):
-    group_models = New_Bike.objects.filter(brand=brand_group)
+def brand_group(request, brand_slug):
+    brand_group = New_Bike.objects.filter(brand_slug=brand_slug)
     context = {
-        'group': group_models,
+        'brand_group': brand_group,
     }
     return render(request, 'bikes/brand_group.html', context)
 
 
-def model_detail(request, brand_slug):
-    group_models = New_Bike.objects.filter(brand=brand_slug)
+def model_detail(request, brand_slug, model_slug):
+    brand_group = New_Bike.objects.filter(brand_slug=brand_slug)
+    model_detail = New_Bike.objects.filter(model_slug=model_slug)
 
     context = {
-        'group': group_models,
+        'brand_group': brand_group,
+        'model_detail': model_detail,
     }
     return render(request, 'bikes/model_detail.html', context)
 

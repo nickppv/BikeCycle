@@ -133,3 +133,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# константа BASE_DIR определяет рабочую папку проекта и к этой папке будет
+# добавлять подкаталог 'media', где будут располагаться файлы проекта
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# добавляет к url графическим медиа префик media
+MEDIA_URL = '/media/'
