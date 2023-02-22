@@ -64,19 +64,16 @@ class New_BikeAdmin(admin.ModelAdmin):
     # вычисляемое поле, котрое мы записываем в словарь
     # prepopulated_fields = {slug: (model,)}
 
-    readonly_fields = ['price',]
+    readonly_fields = ['price']
     # аттрибут, который запрещает редактирование внесенных в него полей
 
     # Перечисляем поля, которые должны отображаться в админке
     list_display = ['id',
                     'brand',
                     'model',
+                    'sex_age',
                     'veloformat',
-                    'wheel_count',
-                    'price',
-                    'reliability',
-                    'rating',
-                    'sportsman']
+                    'price']
     # Добавляем интерфейс для поиска по тексту постов
     search_fields = ('brand', 'model',)
     # Добавляем возможность фильтрации по цене и надежности
@@ -86,10 +83,9 @@ class New_BikeAdmin(admin.ModelAdmin):
     # возможность редактировать поля не заходя в детальную информацию.
     # Можно добавлять все поля, кроме первого и даты: первое является ссылкой
     # на наш объект (с.Егоров Артем), а второе дата добавления в БД
-    list_editable = ['wheel_count',
-                     'price',
-                     'reliability',
-                     'sportsman']
+    list_editable = ['veloformat',
+                     'sex_age',
+                     'price',]
     # начальная сорт-ка задается при помощи ordering, можно по неск. полям
     ordering = ['brand', ]
     # пагинация в админке

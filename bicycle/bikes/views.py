@@ -34,12 +34,26 @@ def brand_group(request, brand_slug):
 def model_detail(request, brand_slug, model_slug):
     brand_group = New_Bike.objects.filter(brand_slug=brand_slug)
     model_detail = New_Bike.objects.filter(model_slug=model_slug)
-
     context = {
         'brand_group': brand_group,
         'model_detail': model_detail,
     }
     return render(request, 'bikes/model_detail.html', context)
+
+
+def veloformat(request, format):
+    group = New_Bike.objects.filter(veloformat=format)
+    context = {'group': group}
+    return render(request, 'bikes/format.html', context)
+
+
+# формируем список для определенной поло-возрастной группы
+def sex_age_group(request, sex_age):
+    group = New_Bike.objects.filter(sex_age=sex_age)
+    context = {
+        'group': group,
+    }
+    return render(request, 'bikes/sex_age_group.html', context)
 
 
 # информация о сайте

@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
+<div class='carousel-index-top'>
+  {% include 'includes/carousel.html' %}
+</div>
   {% for i in page_obj %}
     <div class="bicycle-card">
       <div class="picture-mini">
@@ -12,13 +15,19 @@
       </div>
       <ul>
         <li>
-          Брэнд: {{ i.brand }}
+          Брэнд: <a href="{% url 'bikes:brand_group' i.brand_slug %}"> {{ i.brand }} </a>
         </li>
         <li>
-          Модель: {{i.model}}
+        {% comment %} В url ставим в ковычках ссылку адреса назначения, т.е. по этой ссылке будет отрабатывать адрес из url
+        далее передаем аттрибуты для слагов {% endcomment %}
+          Модель: <a href="{% url 'bikes:model_detail' i.brand_slug i.model_slug %}"> {{i.model}} </a>
         </li>
         <li>
-          Формат: {{ i.veloformat }}, Возраст: {{ i.sex_age }}
+          Формат: <a href="{% url 'bikes:format' i.veloformat %}"> {{ i.veloformat }} </a>
+        </li>
+        <li>
+          Возраст: <a href="{% url 'bikes:sex_age_group' i.sex_age %}"> {{ i.sex_age }} </a>
+          {% comment %} {% url 'bikes:sex_age_group' i.sex_age %} {% endcomment %}
         </li>
         <li>
           Цена: {{ i.price }}

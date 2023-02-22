@@ -4,6 +4,12 @@
   color: #d1d1d1;
 }
 
+a{
+
+  text-decoration: none !important;
+  border: none !important;
+  }
+
 /* основной блок, в котором находятся все остальные блоки */
 .base {
   flex-direction: column;
@@ -27,6 +33,10 @@
   justify-content: space-around;
 }
 
+.main-middle-box {
+
+}
+
 /* адаптивность под разные экраны для блока с велосипедами и пагинатора: внешний отступ */
 @media screen and (max-width: 700px) {
   .main-middle-box, .paginator {
@@ -40,28 +50,11 @@
     display: flex;
     flex: 1;
     flex-wrap: wrap;
-    margin-left: 7%;
-    margin-right: 7%;
+    margin-left: 12%;
+    margin-right: 12%;
   }
 }
-@media screen and (min-width: 1200px) {
-  .main-middle-box, .paginator {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    margin-left: 13%;
-    margin-right: 13%;
-  }
-}
-@media screen and (min-width: 1600px) {
-  .main-middle-box, .paginator {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    margin-left: 17%;
-    margin-right: 17%;
-  }
-}
+
 @media screen and (min-width: 1920px) {
   .main-middle-box, .paginator {
     display: flex;
@@ -127,10 +120,6 @@
   background-image: "../img/site/lower-main-middle-box.png";
 } */
 
-/* стиль для контейнера пагинатора */
-.paginate-container {
-
-}
 /* стиль для элементов списка пагинатора */
 .paginator ul li {
   font-size: 16px;
@@ -146,6 +135,10 @@
 /* выделяем цифру, на которой сейчас находится страница */
 .page-link {
   font-size: 20px;
+}
+
+.carousel-index-top {
+  display: flex;
 }
 
 .footer {
