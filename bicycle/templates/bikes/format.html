@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}
-  ГлаВВелосипеД
-{% endblock %}
+{% block title %} ГлаВВелосипеД {% endblock %}
 
 {% block content %}
   {% for i in page_obj %}
@@ -10,10 +8,13 @@
     <div class="picture-mini">
       <img class="image-settings" src="{% static i.picture %}">
     </div>
-    <p>Брэнд: {{ i.brand }} </p>
-    <p>Модель: {{i.model}}</p>
-    <p>Формат: {{ i.veloformat }}, Возраст: {{ i.sex_age }}</p>
-    <p>Цена: {{ i.price }}</p>
+    <ul>
+      <li>Брэнд: {{ i.brand }} </li>
+      <li>Модель: {{i.model}} </li>
+      <li>Формат: {{ i.veloformat }}</li>
+      <li>Пол & Возраст: {{ i.sex_age }}</li>
+      <li>Цена: {{ i.price }}</li>
+    </ul>
   </div>
   {% endfor %}
 {% endblock %}

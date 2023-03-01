@@ -10,10 +10,13 @@
     <div class="picture-mini">
       <img class="image-settings" src="{% static i.picture %}">
     </div>
-    <p>Брэнд: {{ i.brand }} </p>
-    <p>Модель: {{i.model}} for: {{ i.sex_age }}</p>
-    <p>Формат: {{ i.veloformat }}
-    <p>Цена: {{ i.price }}</p>
+    <ul>
+      <li>Брэнд: {{ i.brand }} </li>
+      <li>Модель: {{i.model}} </li>
+      <li>Формат: {{ i.veloformat }}</li>
+      <li>Пол & Возраст: {{ i.sex_age }}</li>
+      <li>Цена: {{ i.price }}</li>
+    </ul>
   </div>
   {% endfor %}
 {% endblock %}

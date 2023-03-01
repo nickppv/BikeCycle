@@ -26,7 +26,7 @@
           Формат: <a href="{% url 'bikes:format' i.veloformat %}"> {{ i.veloformat }} </a>
         </li>
         <li>
-          Возраст: <a href="{% url 'bikes:sex_age_group' i.sex_age %}"> {{ i.sex_age }} </a>
+          Пол & Возраст: <a href="{% url 'bikes:sex_age_group' i.sex_age %}"> {{ i.sex_age }} </a>
           {% comment %} {% url 'bikes:sex_age_group' i.sex_age %} {% endcomment %}
         </li>
         <li>

@@ -1,4 +1,5 @@
 *{
+  font-family: "Stamps_Pro_Flex";
   margin: 0px;
   padding: 0px;
   color: #444444;
@@ -15,7 +16,7 @@ a {
 }
 
 .header {
-  font-family: "Stamps_Pro_Flex";
+
   font-size: 100px;
   height: 100px;
   text-align: center;
@@ -80,7 +81,6 @@ a {
 .bicycle-card li {
   font-size: 13px;
   list-style-type: square;
-  font-family: "Stamps_Pro_Flex";
   margin: 8px;
   margin-left: 16px;
 }
