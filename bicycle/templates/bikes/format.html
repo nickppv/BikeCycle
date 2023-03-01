@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  {% for i in group %}
+  {% for i in page_obj %}
   <div class="bicycle-card">
     <div class="picture-mini">
       <img class="image-settings" src="{% static i.picture %}">

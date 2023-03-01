@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .models import New_Bike, Sportsman
 
 # постоянная для пагинатора с кол-вом постов на странице
-AMOUNT_POSTS = 15
+AMOUNT_POSTS = 16
 
 
 def index(request):
@@ -25,8 +25,12 @@ def index(request):
 # страница со всеми байками выбранного брэнда
 def brand_group(request, brand_slug):
     brand_group = New_Bike.objects.filter(brand_slug=brand_slug)
+    paginator = Paginator(brand_group, AMOUNT_POSTS)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
         'brand_group': brand_group,
+        'page_obj': page_obj,
     }
     return render(request, 'bikes/brand_group.html', context)
 
@@ -43,15 +47,25 @@ def model_detail(request, brand_slug, model_slug):
 
 def veloformat(request, format):
     group = New_Bike.objects.filter(veloformat=format)
-    context = {'group': group}
+    paginator = Paginator(group, AMOUNT_POSTS)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'group': group,
+        'page_obj': page_obj,
+    }
     return render(request, 'bikes/format.html', context)
 
 
 # формируем список для определенной поло-возрастной группы
 def sex_age_group(request, sex_age):
     group = New_Bike.objects.filter(sex_age=sex_age)
+    paginator = Paginator(group, AMOUNT_POSTS)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
         'group': group,
+        'page_obj': page_obj,
     }
     return render(request, 'bikes/sex_age_group.html', context)
 

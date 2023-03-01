@@ -6,16 +6,17 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class New_Bike(models.Model):
-    M = 'Мужской взрослый'
-    MC = 'Мужской детский'
-    W = 'Женский взрослый'
-    WC = 'Женский детский'
+    # эти переменные отображаются в шаблоне
+    M = 'Man'
+    MC = 'Boy'
+    W = 'Woman'
+    WC = 'Girl'
     # второе значение идет админку в графу для выбора
     SEX_AGE = [
-        (M, 'M'),
-        (MC, 'MC'),
-        (W, 'W'),
-        (WC, 'WC'),
+        (M, 'Man'),
+        (MC, 'Boy'),
+        (W, 'Woman'),
+        (WC, 'Girl'),
     ]
     # чтобы создать поле выбора, можно просто создать список кортежей и
     # передать его в поле модели, но лучше создать отдельно константы
@@ -42,7 +43,6 @@ class New_Bike(models.Model):
     sex_age = models.CharField(
         max_length=16,
         choices=SEX_AGE,
-        default='Взрослый/мужской',
         verbose_name='Пол и возраст'
         )
     veloformat = models.CharField(
@@ -102,10 +102,17 @@ class New_Bike(models.Model):
         verbose_name='Slug Модели',
         blank=True,
     )
+    # sex_age_slug = models.SlugField(
+    #     null=False,
+    #     blank=False,
+    #     unique=False,
+    #     verbose_name='Slug пола и возраста'
+    # )
 
     def save(self, *args, **kwargs):
         self.brand_slug = slugify(self.brand)
         self.model_slug = slugify(self.model)
+        self.sex_age_slug = slugify(self.sex_age)
         super(New_Bike, self).save(*args, **kwargs)
 
     class Meta:

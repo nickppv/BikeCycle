@@ -25,9 +25,18 @@ admin.site.site_header = 'ГлаВВелосипеД'
 admin.site.index_title = 'Вы - прекрасный администратор'
 
 urlpatterns = [
+    # расширяем и изменяем работу встроенного приложения django.contrib.auth,
+    # если какой-то URL не обнаружится в приложении users — Django пойдёт
+    # искать его в django.contrib.auth - этот путь идет ниже, через один.
+    path('auth/', include('users.urls', namespace='users')),
+    # подключаем 'auth' чтобы дать пользователям доступ к страницам приложения
+    # вместо префикса auth/ можно установить любой другой, но хорошим тоном
+    # будет установить префикс, который совпадает с именем приложения,
+    # обрабатывающего URL
+    path('auth/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('', include('bikes.urls', namespace='bikes')),
-
+    path('feedback', include('feedback.urls', namespace='feedback')),
 ]
 
 if settings.DEBUG:

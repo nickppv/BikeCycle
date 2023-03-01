@@ -40,6 +40,8 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'bikes.apps.BikesConfig',
+    'feedback.apps.FeedbackConfig',
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -139,3 +141,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # добавляет к url графическим медиа префик media
 MEDIA_URL = '/media/'
+
+
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'bikes:index'
+LOGOUT_REDIRECT_URL = 'bikes:index'

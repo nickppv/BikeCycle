@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% block content %}
-  {% for i in group %}
+  {% for i in page_obj %}
   <div class="bicycle-card">
     <div class="picture-mini">
       <img class="image-settings" src="{% static i.picture %}">
     </div>
     <p>Брэнд: {{ i.brand }} </p>
-    <p>Модель: {{i.model}}</p>
-    <p>Формат: {{ i.veloformat }}, Возраст: {{ i.sex_age }}</p>
+    <p>Модель: {{i.model}} for: {{ i.sex_age }}</p>
+    <p>Формат: {{ i.veloformat }}
     <p>Цена: {{ i.price }}</p>
   </div>
   {% endfor %}
