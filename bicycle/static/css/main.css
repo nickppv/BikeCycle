@@ -16,13 +16,11 @@ a {
 }
 
 .header {
-
-  font-size: 100px;
-  height: 100px;
+  font-size: 4.5vw;
   text-align: center;
   /* object-fit: contain; */
   color: #d1d1d1;
-  line-height: 100px;
+
 }
 
 .carousel-index-top {
@@ -76,7 +74,7 @@ a {
 }
 
 .bicycle-card:hover {
-  box-shadow: inset 0px 0px 30px #bdf0ff;
+  box-shadow: inset 0px 0px 30px #faffd1;
 }
 .bicycle-card li {
   font-size: 13px;
@@ -101,14 +99,6 @@ a {
 /* .image-settings {
   flex-shrink: 0;
 } */
-
-.mainblock {
-  height: 250px;
-  margin: 20px;
-  background-color: #141414;
-  color:#d1d1d1;
-  width: 50%;
-}
 
 /* пытался сделать картинку на фон */
 /* .lower-main-middle-box {
@@ -162,7 +152,7 @@ a {
   padding-right: 30px;
 }
 
-.button-left {
+/* .button-left {
   font-family: "Stamps_Pro_Flex";
   height: 54px;
   font-size: 20px;
@@ -180,4 +170,4 @@ a {
   display: inline-block;
   margin-top: 30px;
   margin-left: 50px;
-}
+} */
