@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  ГлаВВелосипеД
+{% endblock %}
+
+{% block content %}
+  {% for i in page_obj %}
+    <div>
+      <div>
+        <ul>
+          <li>
+            Автор: {{ i.author }}
+          </li>
+          <li>
+            {{ i.text }}
+          </li>
+          <li>
+            <small>Дата публикации: {{ i.pub_date }}</small>
+          </li>
+        </ul>
+        <hr><br>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
+
+

@@ -36,7 +36,7 @@ urlpatterns = [
     path('auth/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('', include('bikes.urls', namespace='bikes')),
-    path('feedback', include('feedback.urls', namespace='feedback')),
+    path('feedback/', include('feedback.urls', namespace='feedback')),
 ]
 
 if settings.DEBUG:

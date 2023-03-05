@@ -1,4 +1,14 @@
-# from django import forms
+from django.forms import ModelForm
+from .models import FeedBack
 
 
-# class FeedbackForm(forms.Form):
+class FeedbackForm(ModelForm):
+    class Meta:
+        model = FeedBack
+        fields = ['text']
+        labels = {
+            'text': 'Текст',
+        }
+        help_text = {
+            'text': 'Напишите здесь свой положительный (или нет) отзыв.',
+        }

@@ -10,20 +10,23 @@
 
   .box-3 ul li, .box-1 ul li {
     display: inline;
-    font-size: 1.8vw;
+    font-size: 1.4vw;
   }
 
   .box-1, .box-3 {
     padding-top: 2vw;
   }
-
 </style>
 
 <header class="container-for-header">
   <div class="box-1">
     <ul>
       <li><a href="{% url 'bikes:about' %}">О сайте! </a></li>
-      <li><a href="#">  Отзывы </a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'feedback:feedback_posts' %}">  Отзывы/</a><a href="{% url 'feedback:create' %}"style="color: red;">Написать</a></li>
+      {% else %}
+      <li><a href="{% url 'feedback:feedback_posts' %}">  Отзывы </a></li>
+      {% endif %}
     </ul>
   </div>
   <div class="box-2">
@@ -34,7 +37,7 @@
   <div class="box-3">
     {% if user.is_authenticated %}
     <ul>
-      <li><a  style="color: red;" href="{% url 'users:logout' %}">{{ user.username| truncatechars:6 }}  </a></li>
+      <li><a  style="color: red;" href="{% url 'users:logout' %}">{{ user.username|truncatechars:6 }}  </a></li>
       <li><a href="{% url 'users:password_reset_form' %}"> Изменить пароль</a></li>
     </ul>
     {% else %}

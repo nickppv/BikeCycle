@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  ГлаВВелосипеД
+{% endblock %}
+
+{% block content %}
+    <div>
+      <form method="POST" novalidate>
+      {% csrf_token %}
+      {% for field in form %}
+      <div>
+        {{field.label_tag}}
+        <br>
+        {{ form.text }}
+        <br>
+        {{field.help_text}}
+
+
+      </div>
+      {% endfor %}
+      <input type="submit" style="color: black; font-size: 16px; border-radius: 10px; padding:15px; width:250px" value="Отправить" >
+    </div>
+{% endblock %}
+
+

@@ -102,12 +102,6 @@ class New_Bike(models.Model):
         verbose_name='Slug Модели',
         blank=True,
     )
-    # sex_age_slug = models.SlugField(
-    #     null=False,
-    #     blank=False,
-    #     unique=False,
-    #     verbose_name='Slug пола и возраста'
-    # )
 
     def save(self, *args, **kwargs):
         self.brand_slug = slugify(self.brand)
@@ -182,7 +176,7 @@ class Extension(models.Model):
     )
 
     class Meta:
-        verbose_name = 'расширение'
+        verbose_name = 'Расширение'
         verbose_name_plural = 'Расширения'
 
     def __str__(self) -> str:

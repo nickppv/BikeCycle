@@ -5,5 +5,6 @@ from feedback import views
 app_name = 'feedback'
 
 urlpatterns = [
-    # path('', views.index, name='index'),
+    path('', views.feedback_posts, name='feedback_posts'),
+    path('create/', views.create, name='create'),
 ]

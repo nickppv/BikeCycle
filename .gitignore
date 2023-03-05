@@ -128,3 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .vscode/
+
+sent_emails
+.sent_emails
+sent_emails/

@@ -40,6 +40,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'bikes.apps.BikesConfig',
+    'core.apps.CoreConfig',
     'feedback.apps.FeedbackConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',
@@ -75,6 +76,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.year.year',
             ],
         },
     },
