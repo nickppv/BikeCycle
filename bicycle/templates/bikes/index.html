@@ -10,29 +10,12 @@
 </div>
   {% for i in page_obj %}
     <div class="bicycle-card">
-      <div class="picture-mini">
-        <img class="image-settings" src="{% static i.picture %}">
-      </div>
-      <ul>
-        <li>
-          Брэнд: <a href="{% url 'bikes:brand_group' i.brand_slug %}"> {{ i.brand }} </a>
-        </li>
-        <li>
-        {% comment %} В url ставим в ковычках ссылку адреса назначения, т.е. по этой ссылке будет отрабатывать адрес из url
-        далее передаем аттрибуты для слагов {% endcomment %}
-          Модель: <a href="{% url 'bikes:model_detail' i.brand_slug i.model_slug %}"> {{i.model}} </a>
-        </li>
-        <li>
-          Формат: <a href="{% url 'bikes:format' i.veloformat %}"> {{ i.veloformat }} </a>
-        </li>
-        <li>
-          Пол & Возраст: <a href="{% url 'bikes:sex_age_group' i.sex_age %}"> {{ i.sex_age }} </a>
-          {% comment %} {% url 'bikes:sex_age_group' i.sex_age %} {% endcomment %}
-        </li>
-        <li>
-          Цена: {{ i.price }}
-        </li>
-      </ul>
+      <a href="{% url 'bikes:model_detail' i.brand_slug i.model_slug %}"> 
+        <div class="picture-mini">
+          <img class="image-settings" src="{% static i.picture %}">
+        </div>
+      </a>
+      {% include 'includes/specifications.html' %}
     </div>
   {% endfor %}
 {% endblock %}

@@ -74,7 +74,7 @@ a {
 }
 
 .bicycle-card:hover {
-  box-shadow: inset 0px 0px 30px #faffd1;
+  box-shadow: inset 0px 0px 30px #d1f2ff;
 }
 .bicycle-card li {
   font-size: 13px;

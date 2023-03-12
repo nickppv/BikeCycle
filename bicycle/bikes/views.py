@@ -70,6 +70,21 @@ def sex_age_group(request, sex_age):
     return render(request, 'bikes/sex_age_group.html', context)
 
 
+# страница с велосипедами схожей ценовой категории - +/-3000
+def price_group(request, price):
+    price_group = New_Bike.objects.filter(
+        price__gte=float(price)-3000).filter(
+        price__lte=float(price)+3000)
+    paginator = Paginator(price_group, AMOUNT_POSTS)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'price_group': price_group,
+        'page_obj': page_obj,
+    }
+    return render(request, 'bikes/price_group.html', context)
+
+
 # информация о сайте
 def about(request):
     return render(request, 'about/about.html')

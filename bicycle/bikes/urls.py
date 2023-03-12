@@ -11,5 +11,6 @@ urlpatterns = [
     path('brand/<slug:brand_slug>/', views.brand_group, name='brand_group'),
     path('brand/<slug:brand_slug>/<slug:model_slug>/',
          views.model_detail, name='model_detail'),
-    path('for/<sex_age>/', views.sex_age_group, name='sex_age_group')
+    path('for/<sex_age>/', views.sex_age_group, name='sex_age_group'),
+    path('price/<price>/', views.price_group, name='price_group'),
 ]

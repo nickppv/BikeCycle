@@ -1,0 +1,10 @@
+<ul>
+  <li><a href="{% url 'bikes:brand_group' i.brand_slug %}">Брэнд: {{ i.brand }}</a></li>
+  <li>
+  {% comment %} В url ставим в ковычках ссылку адреса назначения, т.е. по этой ссылке будет отрабатывать адрес из url
+  далее передаем аттрибуты для слагов {% endcomment %}
+  <a href="{% url 'bikes:model_detail' i.brand_slug i.model_slug %}">Модель: {{i.model}}</a></li>
+  <li><a href="{% url 'bikes:format' i.veloformat %}">Формат: {{ i.veloformat }}</a></li>
+  <li><a href="{% url 'bikes:sex_age_group' i.sex_age %}">Пол & Возраст: {{ i.sex_age }}</a></li>
+  <li><a href="{% url 'bikes:price_group' i.price %}"> Цена: {{ i.price }}</a></li>
+</ul>
