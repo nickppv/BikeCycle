@@ -37,6 +37,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('bikes.urls', namespace='bikes')),
     path('feedback/', include('feedback.urls', namespace='feedback')),
+    path('captcha/', include('captcha.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 if settings.DEBUG:

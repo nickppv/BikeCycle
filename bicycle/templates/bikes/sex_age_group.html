@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} ГлаВВелосипеД {% endblock %}
+{% block title %} {% if group.first.sex_age == "Woman" %} Велосипеды для прекрасных женщин {{group.first.sex_age}}bike
+                  {% elif group.first.sex_age == "Man" %} Велосипеды для сильных мужчин {{group.first.sex_age}}bike
+                  {% elif group.first.sex_age == "Boy" %} Велосипеды для озорных мальчишек {{group.first.sex_age}}bike
+                  {% elif group.first.sex_age == "Girl" %} Велосипеды для маленьких принцесс {{group.first.sex_age}}bike
+                  {% else %} А нет тут этих ваших else {% endif %}
+{% endblock %}
 
 {% block content %}
   {% for i in page_obj %}

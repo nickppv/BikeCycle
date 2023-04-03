@@ -37,7 +37,7 @@
   <div class="box-3">
     {% if user.is_authenticated %}
     <ul>
-      <li><a  style="color: red;" href="{% url 'users:logout' %}">{{ user.username|truncatechars:6 }}  </a></li>
+      <li><a style="color: red;" href="{% url 'users:logout' %}">{{ user.username|truncatechars:6 }}  </a></li>
       <li><a href="{% url 'users:password_reset_form' %}"> Изменить пароль</a></li>
     </ul>
     {% else %}

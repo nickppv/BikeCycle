@@ -26,13 +26,13 @@ SECRET_KEY = 'django-insecure-@xws4^$80d3@wlp7tx^lac2m40=+5ef4fv^gc0g3sail1$m-ig
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#  при добавлении строк сервера, можно проверить работоспособность
-#  переопределенных функций для ошибок 404, 403, 500
+# при добавлении строк сервера, можно проверить работоспособность переопределенных функций для ошибок 404, 403, 500
+# при развертывании проекта устанавливается домен сайта
 ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "[::1]",
-    "testserver",
+    'localhost',
+    '127.0.0.1',
+    '[::1]',
+    'testserver',
 ]
 
 
@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    # добавил капчу для формы регистрации и авторизации
+    'captcha',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +63,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+]
+
+# для django_debug_toolbar, он запускается на этом адресе
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 ROOT_URLCONF = 'bicycle.urls'
@@ -154,3 +163,17 @@ LOGOUT_REDIRECT_URL = 'bikes:index'
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 # указываем директорию, в которую будут складываться файлы писем
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+
+# некоторые настройки для капчи
+# остальные астройки здесь - https://django-simple-captcha.readthedocs.io/en/latest/advanced.html#configuration-toggles
+CAPTCHA_FONT_SIZE = 26
+CAPTCHA_LETTER_ROTATION = (-45,45)
+CAPTCHA_BACKGROUND_COLOR = '#ffffff'
+CAPTCHA_TIMEOUT = 2
+CAPTCHA_LENGTH = 6
+# чтобы сделать больше шума - повторил аргументы в кортеже
+CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_arcs',
+                           'captcha.helpers.noise_dots',
+                           'captcha.helpers.noise_arcs',
+                           'captcha.helpers.noise_dots',
+                           )

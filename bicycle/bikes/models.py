@@ -74,7 +74,7 @@ class New_Bike(models.Model):
         verbose_name='Изображение товара'
         )
     price = models.FloatField(
-        validators=[MinValueValidator(0)],
+        validators=[MinValueValidator(0), MaxValueValidator(1000000)],
         verbose_name='Стоимость'
         )
     reliability = models.IntegerField(

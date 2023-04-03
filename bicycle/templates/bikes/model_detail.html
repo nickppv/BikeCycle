@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} ГлаВВелосипеД {% endblock %}
+{% block title %} Брэнд: {{title.brand}}; Модель: {{title.model}} {% endblock %}
 
 {% block content %}
   {% for i in model_detail %}

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %} {{query_title}} {% endblock %}
 
 {% block content %}
 <form action="{% url 'bikes:filter' %}" method="GET">
@@ -34,7 +34,7 @@
 <div class='carousel-index-top'>
   {% include 'includes/carousel.html' %}
 </div>
-  {% for i in page_obj %}
+  {% for i in filter_result %}
     <div class="bicycle-card">
       <a href="{% url 'bikes:model_detail' i.brand_slug i.model_slug %}"> 
         <div class="picture-mini">
@@ -45,5 +45,3 @@
     </div>
   {% endfor %}
 {% endblock %}
-
-
