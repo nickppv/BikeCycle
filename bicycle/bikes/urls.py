@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('filter/', views.filter, name='filter'),
     path('about/', views.about, name='about'),
+    path('happy_bonus_bike/', views.bonus_bike, name='bonus_bike'),
     path('brand/<slug:brand_slug>/', views.brand_group, name='brand_group'),
     path('veloformat/<format>/', views.veloformat, name='format'),
     path('brand/<slug:brand_slug>/<slug:model_slug>/',

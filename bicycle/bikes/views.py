@@ -2,6 +2,8 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db.models import Q
 from django.views.generic import ListView
+from datetime import datetime
+import random 
 from .models import New_Bike, Sportsman
 
 # постоянная для пагинатора с кол-вом постов на странице
@@ -9,17 +11,17 @@ AMOUNT_POSTS = 15
 
 
 def index(request):
-    filter_brand = request.GET.get('brand')
-    filter_veloformat = request.GET.get('veloformat')
-    filter_sex_age = request.GET.get('sex_age')
-    if filter_brand and filter_veloformat and filter_sex_age:
-        filter_result = New_Bike.objects.filter(
-            Q(brand__icontains=filter_brand) &
-            Q(veloformat__icontains=filter_veloformat) &
-            Q(sex_age__icontains=filter_sex_age)
-            )
-    else:
-        filter_result = New_Bike.objects.all().order_by('price')
+    # filter_brand = request.GET.get('brand')
+    # filter_veloformat = request.GET.get('veloformat')
+    # filter_sex_age = request.GET.get('sex_age')
+    # if filter_brand and filter_veloformat and filter_sex_age:
+    #     filter_result = New_Bike.objects.filter(
+    #         Q(brand__icontains=filter_brand) &
+    #         Q(veloformat__icontains=filter_veloformat) &
+    #         Q(sex_age__icontains=filter_sex_age)
+    #         )
+    # else:
+    #     filter_result = New_Bike.objects.all().order_by('price')
 
     all_details = New_Bike.objects.all().order_by('price')
     # создаем экземпляр класса Paginator и указываем количество товаров.
@@ -32,13 +34,14 @@ def index(request):
     distinct_brand = New_Bike.objects.values('brand').distinct()
     distinct_veloformat = New_Bike.objects.values('veloformat').distinct()
     distinct_sex_age = New_Bike.objects.values('sex_age').distinct()
+
     context = {
         'distinct_brand': distinct_brand,
         'distinct_veloformat': distinct_veloformat,
         'distinct_sex_age': distinct_sex_age,
         'page_obj': page_obj,
         'all_details': all_details,
-        'filter_result': filter_result,
+        # 'filter_result': filter_result,
         'title': 'ГлаВВелосипеД',
     }
     return render(request, 'bikes/index.html', context)
@@ -163,6 +166,21 @@ def price_group(request, price):
         'page_obj': page_obj,
     }
     return render(request, 'bikes/price_group.html', context)
+
+
+def bonus_bike(request):
+    '''функция для отображения случайного велосипеда из БД со скидкой,
+    меняется каждый час'''
+    # создаем зерно на основе даты, которое будет меняться каждый час, день...
+    bonus_bike_random_seed = datetime.now().strftime('%y%m%d%H%M')
+    random.seed(bonus_bike_random_seed)
+    random_id = random.choice(New_Bike.objects.values('id'))['id']
+    choose_happy_bike = New_Bike.objects.filter(id=random_id)
+
+    context = {
+        'choose_happy_bike': choose_happy_bike,
+    }
+    return render(request, 'bikes/bonus_bike.html', context)
 
 
 # информация о сайте
