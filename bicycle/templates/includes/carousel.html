@@ -46,12 +46,14 @@ img {vertical-align: middle;}
 /* Caption text */
 .text {
   color: #f2f2f2;
-  font-size: 15px;
+  font-size: 18px;
   padding: 8px 12px;
   position: absolute;
   bottom: 8px;
   width: 100%;
   text-align: center;
+  top: 30%;
+
 }
 
 /* Number text (1/3 etc) */
@@ -108,21 +110,34 @@ img {vertical-align: middle;}
 <div class="slideshow-container">
 
 <div class="mySlides fade">
-  <div class="numbertext">1 / 3</div>
+  <a href="{% url 'bikes:bonus_bike' %}">
+  <div class="numbertext">1 / 4</div>
   <img style="width:100%" src="{% static "img/site/1.jpg"%}">
-  <div class="text">Здесь что-то можно написать</div>
+  <div class="text" style="text-shadow: 1px 1px 2px black;">Счастливый час!<br>Каждый час - новый велосипед со скидкой!</div>
+  </a>
 </div>
 
 <div class="mySlides fade">
-  <div class="numbertext">2 / 3</div>
+  <a href="{% url 'bikes:bonus_bike' %}">
+  <div class="numbertext">2 / 4</div>
   <img style="width:100%" src="{% static "img/site/2.jpg"%}">
-  <div class="text">И здесь что-то НАДО написать</div>
+  <div class="text" style="text-shadow: 1px 1px 2px black;">Скидка выбирается случайным образом <br>в диапазоне от 10% до 50%</div>
 </div>
 
 <div class="mySlides fade">
-  <div class="numbertext">3 / 3</div>
+  <a href="{% url 'bikes:bonus_bike' %}">
+  <div class="numbertext">3 / 4</div>
   <img style="width:100%" src="{% static "img/site/3.jpg"%}">
-  <div class="text">А тут... тут тоже написать </div>
+  {% for i in choose_happy_bike %}
+  <div class="text" style="text-shadow: 1px 1px 2px black;">На данный момент велосипед: {{ i.brand }}-{{ i.model }} <br> со скидкой {{ discount }}% и ценой: <s>{{ i.price }}</s> {{new_price}} </div>
+  {% endfor %}
+</div>
+
+<div class="mySlides fade">
+  <a href="{% url 'bikes:bonus_bike' %}">
+  <div class="numbertext">4 / 4</div>
+  <img style="width:100%" src="{% static "img/site/2.jpg"%}">
+  <div class="text" style="text-shadow: 1px 1px 2px black;"> Данный сайт - учебный проект для портфолио.<br>Вопросы, пожелания и предложения можно отправить на pvnick@yandex.ru<br>Или оставить прямо на сайте</div>
 </div>
 
 <a class="prev" onclick="plusSlides(-1)">❮</a>
