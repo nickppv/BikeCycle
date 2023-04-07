@@ -143,7 +143,7 @@ a {
 /* скачанный шрифт для основного заголовка */
 @font-face {
   font-family: "Stamps_Pro_Flex"; 
-  src: url("../fonts/Stamps_Pro_Flex.ttf") format("truetype"); 
+  src: url("../fonts/Stamps_Pro_Flex.woff") format("truetype"); 
   font-style: normal; 
   font-weight: normal; 
   }

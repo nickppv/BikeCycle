@@ -5,9 +5,11 @@
 {% block content %}
   {% for i in page_obj %}
   <div class="bicycle-card">
+    <a href="{% url 'bikes:model_detail' i.brand_slug i.model_slug %}"> 
     <div class="picture-mini">
       <img class="image-settings" src="{% static i.picture %}">
     </div>
+    </a>
     {% include 'includes/specifications.html' %}
   </div>
   {% endfor %}
