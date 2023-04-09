@@ -71,6 +71,21 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+# ADMINS - список людей, которые получают уведомления об ошибках кода.
+# когда DEBUG=False и AdminEmailHandler настроен в LOGGING (сделано по
+# умолчанию), Django отправляет этим людям по электронной почте сведения
+# об исключениях, возникших в цикле запрос/ответ.
+ADMINS = [('Nikolay', 'pvnick@yandex.ru'), ]
+
+# настройки для отправки писем, включая восстановление пароля
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'pvnick@yandex.ru'
+EMAIL_HOST_PASSWORD = 'adfpuspqqhvufsvz'
+DEFAULT_FROM_EMAIL = 'pvnick@yandex.ru'
+
 ROOT_URLCONF = 'bicycle.urls'
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
@@ -158,16 +173,21 @@ LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'bikes:index'
 LOGOUT_REDIRECT_URL = 'bikes:index'
 
-
 #  подключаем движок filebased.EmailBackend
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+if DEBUG:
+    # в режиме отладки используем локальную папку для писем восстановления
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    # в боевом режиме используем smtp-сервер
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 # указываем директорию, в которую будут складываться файлы писем
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 
 # некоторые настройки для капчи
 # остальные астройки здесь - https://django-simple-captcha.readthedocs.io/en/latest/advanced.html#configuration-toggles
 CAPTCHA_FONT_SIZE = 26
-CAPTCHA_LETTER_ROTATION = (-45,45)
+CAPTCHA_LETTER_ROTATION = (-45, 45)
 CAPTCHA_BACKGROUND_COLOR = '#ffffff'
 CAPTCHA_TIMEOUT = 2
 CAPTCHA_LENGTH = 6
@@ -177,3 +197,5 @@ CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_arcs',
                            'captcha.helpers.noise_arcs',
                            'captcha.helpers.noise_dots',
                            )
+
+

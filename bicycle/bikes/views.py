@@ -3,25 +3,13 @@ from django.shortcuts import get_object_or_404, render
 from django.db.models import Q
 from datetime import datetime
 import random
-from .models import New_Bike, Sportsman
+from .models import New_Bike
 
 # постоянная для пагинатора с кол-вом постов на странице
 AMOUNT_POSTS = 15
 
 
 def index(request):
-    # filter_brand = request.GET.get('brand')
-    # filter_veloformat = request.GET.get('veloformat')
-    # filter_sex_age = request.GET.get('sex_age')
-    # if filter_brand and filter_veloformat and filter_sex_age:
-    #     filter_result = New_Bike.objects.filter(
-    #         Q(brand__icontains=filter_brand) &
-    #         Q(veloformat__icontains=filter_veloformat) &
-    #         Q(sex_age__icontains=filter_sex_age)
-    #         )
-    # else:
-    #     filter_result = New_Bike.objects.all().order_by('price')
-
     all_details = New_Bike.objects.all().order_by('price')
     # создаем экземпляр класса Paginator и указываем количество товаров.
     paginator = Paginator(all_details, AMOUNT_POSTS)
@@ -34,13 +22,13 @@ def index(request):
     distinct_veloformat = New_Bike.objects.values('veloformat').distinct()
     distinct_sex_age = New_Bike.objects.values('sex_age').distinct()
 
-    bonus_bike_random_seed = datetime.now().strftime('%y%m%d%H%M')
+    bonus_bike_random_seed = datetime.now().strftime('%y%m%d%H')
     random.seed(bonus_bike_random_seed)
     discount = random.randrange(10, 51)
     random_id = random.choice(New_Bike.objects.values('id'))['id']
     choose_happy_bike = New_Bike.objects.filter(id=random_id)
-    new_price = round((choose_happy_bike.values('price')[0]['price'] *
-                      (1-discount/100)), 1)
+    new_price = round((choose_happy_bike.values('price')[0]['price'] * (
+        1-discount/100)), 1)
 
     context = {
         'distinct_brand': distinct_brand,
@@ -96,14 +84,14 @@ def filter(request):
     distinct_veloformat = New_Bike.objects.values('veloformat').distinct()
     distinct_sex_age = New_Bike.objects.values('sex_age').distinct()
 
+    query_title = [i for i in [filter_brand, filter_veloformat, filter_sex_age] if i is not None]
+
     context = {
-        'query_title': f'''Запрос: {filter_veloformat}
-                        {filter_brand} for {filter_sex_age}''',
+        'query_title': query_title,
         'distinct_brand': distinct_brand,
         'distinct_veloformat': distinct_veloformat,
         'distinct_sex_age': distinct_sex_age,
         'filter_result': filter_result,
-        # 'brand_filter': brand_filter,
         }
     return render(request, 'bikes/filter.html', context)
 
@@ -184,7 +172,7 @@ def bonus_bike(request):
     '''функция для отображения случайного велосипеда из БД со скидкой,
     меняется каждый час'''
     # создаем зерно на основе даты, которое будет меняться каждый час, день...
-    bonus_bike_random_seed = datetime.now().strftime('%y%m%d%H%M')
+    bonus_bike_random_seed = datetime.now().strftime('%y%m%d%H')
     random.seed(bonus_bike_random_seed)
     discount = random.randrange(10, 51)
     random_id = random.choice(New_Bike.objects.values('id'))['id']

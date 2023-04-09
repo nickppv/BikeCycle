@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} {{query_title}} {% endblock %}
+{% block title %} Фильтр: {%for i in query_title%} {{ i }} {% endfor %} {% endblock %}
 
 {% block content %}
 <form action="{% url 'bikes:filter' %}" method="GET">

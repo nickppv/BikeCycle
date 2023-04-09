@@ -30,7 +30,6 @@ a {
   min-height: 100vh;
 }
 .container-1 div {
-  /* padding: 10px; */
   justify-content: space-around;
 }
 
@@ -95,18 +94,6 @@ a {
   margin-bottom: 15px;
 }
 
-/* пока не удалять, была нужна*/
-/* .image-settings {
-  flex-shrink: 0;
-} */
-
-/* пытался сделать картинку на фон */
-/* .lower-main-middle-box {
-  display: flex;
-  background-image: "../img/site/background_image_repeat.png";
-  background-image: "../img/site/lower-main-middle-box.png";
-} */
-
 /* стиль для элементов списка пагинатора */
 .paginator ul li {
   font-size: 16px;
@@ -152,23 +139,3 @@ a {
   padding-left: 30px;
   padding-right: 30px;
 }
-
-/* .button-left {
-  font-family: "Stamps_Pro_Flex";
-  height: 54px;
-  font-size: 20px;
-  border-radius: 15px;
-  display: inline-block;
-  margin-top: 30px;
-  margin-right: 50px;
-  margin-left: 50px;
-}
-.button-right {
-  font-family: "Stamps_Pro_Flex";
-  height: 54px;
-  font-size: 20px;
-  border-radius: 15px;
-  display: inline-block;
-  margin-top: 30px;
-  margin-left: 50px;
-} */
