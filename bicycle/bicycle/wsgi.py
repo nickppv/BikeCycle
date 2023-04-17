@@ -12,16 +12,11 @@ import sys
 
 from django.core.wsgi import get_wsgi_application
 
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bicycle.settings')
-
 # application = get_wsgi_application()
 
 # -*- coding: utf-8 -*-
 
-
 sys.path.insert(0, '/home/k/kolazig/gvvd.ru/bicycle')
 sys.path.insert(1, '/home/k/kolazig/gvvd.ru/venv_django/lib/python3.9/site-packages/')
-# sys.path.insert(1, '/home/k/kolazig/.local/lib/python3.9/site-packages')
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bicycle.settings')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'bicycle.settings'
 application = get_wsgi_application()
