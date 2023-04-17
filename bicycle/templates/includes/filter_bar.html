@@ -1,0 +1,34 @@
+<form action="{% url 'bikes:filter' %}" method="GET">
+    <div style="border: black solid 1px; padding: 3px; font-size: 14px">
+      <div>
+        
+        <select name="brand" style="color: gray; width: 150px">
+          <option disabled selected>Выбрать брэнд</option>
+          {% for i in distinct_brand %}
+          <option value="{{ i.brand }}">{{ i.brand }}</option>
+          {% endfor %}
+        </select>
+  
+        <select name="veloformat" style="color: gray; width: 120px;">
+          <option disabled selected>Формат</option>
+          {% for i in distinct_veloformat %}
+          <option value="{{ i.veloformat }}">{{ i.veloformat }}</option>
+          {% endfor %}
+        </select>
+  
+        <select name="sex_age" style="color: gray; width: 120px">
+          <option disabled selected>Пол/Возраст</option>
+          {% for i in distinct_sex_age %}
+          <option value="{{ i.sex_age }}">{{ i.sex_age }}</option>
+          {% endfor %}
+        </select>
+
+        <input type="number" style="width: 120px" step='100' placeholder=' Цена от' name='price__gt'>
+        <input type="number" style="width: 120px" step='100' placeholder=' Цена до' name='price__lt'>
+  
+        <button type="submit">Поехали</button>
+        <button type="reset">Сбросить</button>
+
+      </div>
+    </div>
+  </form>

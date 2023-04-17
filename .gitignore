@@ -132,3 +132,4 @@ dmypy.json
 sent_emails
 .sent_emails
 sent_emails/
+settings.py

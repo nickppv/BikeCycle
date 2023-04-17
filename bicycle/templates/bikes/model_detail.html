@@ -3,6 +3,12 @@
 {% block title %} Брэнд: {{title.brand}}; Модель: {{title.model}} {% endblock %}
 
 {% block content %}
+  {% include 'includes/filter_bar.html' %}
+  
+  <div class='carousel-index-top'>
+    {% include 'includes/carousel.html' %}
+  </div>
+  
   {% for i in model_detail %}
   <div class="bicycle-card">
     <div style="width: 426px; height:341px;" class="picture-mini">

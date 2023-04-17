@@ -8,6 +8,12 @@
 {% endblock %}
 
 {% block content %}
+  {% include 'includes/filter_bar.html' %}
+
+  <div class='carousel-index-top'>
+    {% include 'includes/carousel.html' %}
+  </div>
+  
   {% for i in page_obj %}
   <div class="bicycle-card">
     <a href="{% url 'bikes:model_detail' i.brand_slug i.model_slug %}"> 

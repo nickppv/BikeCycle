@@ -1,9 +1,11 @@
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
-from django.db.models import Q
-from datetime import datetime
-import random
 from .models import New_Bike
+from .filters import BikeFilter
+
+import random
+from datetime import datetime
+
 
 # постоянная для пагинатора с кол-вом постов на странице
 AMOUNT_POSTS = 15
@@ -22,11 +24,14 @@ def index(request):
     distinct_veloformat = New_Bike.objects.values('veloformat').distinct()
     distinct_sex_age = New_Bike.objects.values('sex_age').distinct()
 
+    # устанавливаем зерно для модуля random, меняется каждый час
     bonus_bike_random_seed = datetime.now().strftime('%y%m%d%H')
     random.seed(bonus_bike_random_seed)
     discount = random.randrange(10, 51)
     random_id = random.choice(New_Bike.objects.values('id'))['id']
+    # выбор велосипеда со скидкой на ближайший час
     choose_happy_bike = New_Bike.objects.filter(id=random_id)
+    # цена велосипеда со скидкой
     new_price = round((choose_happy_bike.values('price')[0]['price'] * (
         1-discount/100)), 1)
 
@@ -45,55 +50,22 @@ def index(request):
 
 
 def filter(request):
-    """Фильтр поиска велосипедов"""
-    filter_brand = request.GET.get('brand')
-    filter_veloformat = request.GET.get('veloformat')
-    filter_sex_age = request.GET.get('sex_age')
-    if ('brand' in request.GET and
-            'veloformat' in request.GET and
-            'sex_age' in request.GET):
-        filter_result = New_Bike.objects.filter(Q(
-            brand__icontains=filter_brand) & Q(
-            veloformat__icontains=filter_veloformat) & Q(
-            sex_age__icontains=filter_sex_age))
-    elif 'brand' in request.GET and 'veloformat' in request.GET:
-        filter_result = New_Bike.objects.filter(Q(
-            brand__icontains=filter_brand) & Q(
-            veloformat__icontains=filter_veloformat))
-    elif 'brand' in request.GET and 'sex_age' in request.GET:
-        filter_result = New_Bike.objects.filter(Q(
-            brand__icontains=filter_brand) & Q(
-            sex_age__icontains=filter_sex_age))
-    elif 'veloformat' in request.GET and 'sex_age' in request.GET:
-        filter_result = New_Bike.objects.filter(Q(
-            veloformat__icontains=filter_veloformat) & Q(
-            sex_age__icontains=filter_sex_age))
-    elif 'brand' in request.GET:
-        filter_result = New_Bike.objects.filter(
-            brand__icontains=filter_brand)
-    elif 'veloformat' in request.GET:
-        filter_result = New_Bike.objects.filter(
-            veloformat__icontains=filter_veloformat)
-    elif 'sex_age' in request.GET:
-        filter_result = New_Bike.objects.filter(
-            sex_age__icontains=filter_sex_age)
-    else:
-        filter_result = New_Bike.objects.all()
-
     distinct_brand = New_Bike.objects.values('brand').distinct()
     distinct_veloformat = New_Bike.objects.values('veloformat').distinct()
     distinct_sex_age = New_Bike.objects.values('sex_age').distinct()
+    filter = BikeFilter(request.GET, queryset=New_Bike.objects.all())
 
-    query_title = [i for i in [filter_brand, filter_veloformat, filter_sex_age] if i is not None]
-
+    paginator = Paginator(filter.qs, AMOUNT_POSTS)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        'query_title': query_title,
         'distinct_brand': distinct_brand,
         'distinct_veloformat': distinct_veloformat,
         'distinct_sex_age': distinct_sex_age,
-        'filter_result': filter_result,
+        'filter': filter,
+        'page_obj': page_obj,
         }
-    return render(request, 'bikes/filter.html', context)
+    return render(request, 'bikes/page_filter.html', context)
 
 
 # страница со всеми байками выбранного брэнда

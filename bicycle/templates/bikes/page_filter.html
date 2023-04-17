@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %} Фильтр: {%for i in filter.qs%} {{ i }} {% endfor %} {% endblock %}
+
 
 {% block content %}
   {% include 'includes/filter_bar.html' %}
@@ -20,5 +21,3 @@
     </div>
   {% endfor %}
 {% endblock %}
-
-

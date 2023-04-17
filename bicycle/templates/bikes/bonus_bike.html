@@ -3,6 +3,12 @@
 {% block title %} Велобонус! {% endblock %}
 
 {% block content %}
+  {% include 'includes/filter_bar.html' %}
+
+  <div class='carousel-index-top'>
+    {% include 'includes/carousel.html' %}
+  </div>
+  
   {% for i in choose_happy_bike %}
   <div class="bicycle-card">
     <div style="width: 426px; height:341px;" class="picture-mini">
