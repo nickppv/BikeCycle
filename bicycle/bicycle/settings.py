@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-from conf import MY_KEY
+from conf import MY_KEY, HOST_PASSWORD, ADRESS_LIST_ERRORS, MY_EMAIL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,16 +78,16 @@ INTERNAL_IPS = [
 # когда DEBUG=False и AdminEmailHandler настроен в LOGGING (сделано по
 # умолчанию), Django отправляет этим людям по электронной почте сведения
 # об исключениях, возникших в цикле запрос/ответ.
-ADMINS = [('Nikolay', 'pvnick@yandex.ru'), ]
+ADMINS = ADRESS_LIST_ERRORS
 
 # настройки для отправки писем, включая восстановление пароля
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'pvnick@yandex.ru'
-EMAIL_HOST_PASSWORD = 'adfpuspqqhvufsvz'
-DEFAULT_FROM_EMAIL = 'pvnick@yandex.ru'
+EMAIL_HOST_USER = MY_EMAIL
+EMAIL_HOST_PASSWORD = HOST_PASSWORD
+DEFAULT_FROM_EMAIL = MY_EMAIL
 
 ROOT_URLCONF = 'bicycle.urls'
 
@@ -200,5 +200,3 @@ CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_arcs',
                            'captcha.helpers.noise_arcs',
                            'captcha.helpers.noise_dots',
                            )
-
-
