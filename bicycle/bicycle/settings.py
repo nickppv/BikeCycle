@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-from conf import MY_KEY, HOST_PASSWORD, ADRESS_LIST_ERRORS, MY_EMAIL
+from .conf import MY_KEY, HOST_PASSWORD, ADRESS_LIST_ERRORS, MY_EMAIL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

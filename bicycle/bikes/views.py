@@ -8,7 +8,19 @@ from datetime import datetime
 
 
 # постоянная для пагинатора с кол-вом постов на странице
-AMOUNT_POSTS = 15
+AMOUNT_POSTS = 18
+
+
+def values_for_filter():
+    distinct_brand = New_Bike.objects.values('brand').distinct()
+    distinct_veloformat = New_Bike.objects.values('veloformat').distinct()
+    distinct_sex_age = New_Bike.objects.values('sex_age').distinct()
+    context = {
+        'distinct_brand': distinct_brand,
+        'distinct_veloformat': distinct_veloformat,
+        'distinct_sex_age': distinct_sex_age,
+    }
+    return context
 
 
 def index(request):
@@ -20,9 +32,7 @@ def index(request):
     # формируем список элементов текущей страницы
     page_obj = paginator.get_page(page_number)
     # выборка уникальных полей брэнда
-    distinct_brand = New_Bike.objects.values('brand').distinct()
-    distinct_veloformat = New_Bike.objects.values('veloformat').distinct()
-    distinct_sex_age = New_Bike.objects.values('sex_age').distinct()
+
 
     # устанавливаем зерно для модуля random, меняется каждый час
     bonus_bike_random_seed = datetime.now().strftime('%y%m%d%H')
@@ -36,35 +46,26 @@ def index(request):
         1-discount/100)), 1)
 
     context = {
-        'distinct_brand': distinct_brand,
-        'distinct_veloformat': distinct_veloformat,
-        'distinct_sex_age': distinct_sex_age,
         'page_obj': page_obj,
         'all_details': all_details,
         'discount': discount,
         'new_price': new_price,
         'choose_happy_bike': choose_happy_bike,
         'title': 'ГлаВВелосипеД',
-    }
+    } | values_for_filter()
     return render(request, 'bikes/index.html', context)
 
 
 def filter(request):
-    distinct_brand = New_Bike.objects.values('brand').distinct()
-    distinct_veloformat = New_Bike.objects.values('veloformat').distinct()
-    distinct_sex_age = New_Bike.objects.values('sex_age').distinct()
     filter = BikeFilter(request.GET, queryset=New_Bike.objects.all())
 
     paginator = Paginator(filter.qs, AMOUNT_POSTS)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-        'distinct_brand': distinct_brand,
-        'distinct_veloformat': distinct_veloformat,
-        'distinct_sex_age': distinct_sex_age,
         'filter': filter,
         'page_obj': page_obj,
-        }
+        } | values_for_filter()
     return render(request, 'bikes/page_filter.html', context)
 
 
@@ -77,7 +78,7 @@ def brand_group(request, brand_slug):
     context = {
         'brand_group': brand_group,
         'page_obj': page_obj,
-    }
+    } | values_for_filter()
     return render(request, 'bikes/brand_group.html', context)
 
 
@@ -89,7 +90,7 @@ def model_detail(request, brand_slug, model_slug):
         'title': title,
         'brand_group': brand_group,
         'model_detail': model_detail,
-    }
+    } | values_for_filter()
     return render(request, 'bikes/model_detail.html', context)
 
 
@@ -101,7 +102,7 @@ def veloformat(request, format):
     context = {
         'group': group,
         'page_obj': page_obj,
-    }
+    } | values_for_filter()
     return render(request, 'bikes/format.html', context)
 
 
@@ -114,7 +115,7 @@ def sex_age_group(request, sex_age):
     context = {
         'group': group,
         'page_obj': page_obj,
-    }
+    } | values_for_filter()
     return render(request, 'bikes/sex_age_group.html', context)
 
 
@@ -136,7 +137,7 @@ def price_group(request, price):
         'title': f'цена от {float(title)-3000} до {float(title)+3000}',
         'price_group': price_group,
         'page_obj': page_obj,
-    }
+    } | values_for_filter()
     return render(request, 'bikes/price_group.html', context)
 
 
@@ -151,12 +152,11 @@ def bonus_bike(request):
     choose_happy_bike = New_Bike.objects.filter(id=random_id)
     new_price = round((choose_happy_bike.values('price')[0]['price'] *
                       (1-discount/100)), 1)
-
     context = {
         'discount': discount,
         'new_price': new_price,
         'choose_happy_bike': choose_happy_bike,
-    }
+    } | values_for_filter()
     return render(request, 'bikes/bonus_bike.html', context)
 
 
