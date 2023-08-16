@@ -1,7 +1,7 @@
 /* скачанный шрифт для основного заголовка */
 @font-face {
   font-family: "Stamps_Pro_Flex"; 
-  src: url("../fonts/StampsPro.woff2") format("truetype"); 
+  src: url("../fonts/StampsPro.woff2") format("woff2"); 
   font-style: normal; 
   font-weight: normal; 
 }
