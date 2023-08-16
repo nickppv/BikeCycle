@@ -1,3 +1,11 @@
+/* скачанный шрифт для основного заголовка */
+@font-face {
+  font-family: "Stamps_Pro_Flex"; 
+  src: url("../fonts/StampsPro.woff2") format("truetype"); 
+  font-style: normal; 
+  font-weight: normal; 
+}
+
 *{
   font-family: "Stamps_Pro_Flex";
   margin: 0px;
@@ -8,7 +16,7 @@
 a {
   text-decoration: none !important;
   border: none !important;
-  }
+}
 
 /* основной блок, в котором находятся все остальные блоки */
 .base {
@@ -20,15 +28,16 @@ a {
   text-align: center;
   /* object-fit: contain; */
   color: #d1d1d1;
-
 }
 
 .carousel-index-top {
   margin-bottom: 30px;
 }
+
 .container-1 {
   min-height: 100vh;
 }
+
 .container-1 div {
   justify-content: space-around;
 }
@@ -75,6 +84,7 @@ a {
 .bicycle-card:hover {
   box-shadow: inset 0px 0px 30px #d1f2ff;
 }
+
 .bicycle-card li {
   font-size: 13px;
   list-style-type: square;
@@ -97,15 +107,16 @@ a {
 /* стиль для элементов списка пагинатора */
 .paginator ul li {
   font-size: 16px;
-  font-family: "Stamps_Pro_Flex";
   margin: 8px;
   display: inline;
   text-decoration-skip-ink: none;
   text-decoration: none;
 }
+
 .paginator ul li:hover {
   text-shadow: 0px 0px 3px red;
 }
+
 /* выделяем цифру, на которой сейчас находится страница */
 .page-link {
   font-size: 20px;
@@ -116,24 +127,14 @@ a {
 }
 
 .footer {
-  font-family: "Stamps_Pro_Flex";
   font-size: 30px;
   width: 100%;
   height: 100px;
   text-align: center;
-  /* object-fit: contain; */
   line-height: 100px;
   border-top: #444444 2px solid;
   margin-top: 10px;
 }
-
-/* скачанный шрифт для основного заголовка */
-@font-face {
-  font-family: "Stamps_Pro_Flex"; 
-  src: url("../fonts/Stamps_Pro_Flex.woff") format("truetype"); 
-  font-style: normal; 
-  font-weight: normal; 
-  }
 
 .container-for-header {
   padding-left: 30px;
